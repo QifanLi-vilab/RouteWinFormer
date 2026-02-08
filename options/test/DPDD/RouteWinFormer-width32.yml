@@ -1,0 +1,35 @@
+# general settings
+name: RouteWinFormer-DPDD-width32
+model_type: ImageRestorationModel
+scale: 1
+num_gpu: 4
+manual_seed: 42
+
+
+network_g:
+  type: RouteWinFormer
+  dim: 32
+  img_size: 256
+  enc_nums: [2, 4, 6, 8]
+  dec_nums: [2, 4, 6, 8]
+  num_heads: [1, 2, 4, 8]
+  # win_nums: [1,1,2,3]
+# path
+path:
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+
+# logging settings
+logger:
+  print_freq: 200
+  save_checkpoint_freq: !!float 5e3
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500
